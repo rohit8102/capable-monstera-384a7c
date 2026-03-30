@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificates | Rohit Kumar</title>
+
+<script>
+if (localStorage.getItem("loggedIn") !== "true") {
+  window.location.replace("login.html");
+}
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0d1117;
+  color: #fff;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #58a6ff;
+  margin: 30px 0;
+  animation: fadeIn 1s ease;
+}
+
+/* Certificate List */
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Sidebar */
+.cert-list {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Certificate Card */
+.cert-card {
+  background: #161b22;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.cert-card:hover {
+  transform: translateX(5px) scale(1.02);
+  border: 1px solid #58a6ff;
+  box-shadow: 0 0 20px #58a6ff55;
+}
+
+/* Active Card */
+.active {
+  background: #1f2937;
+  border: 1px solid #58a6ff;
+}
+
+/* Viewer */
+.viewer {
+  width: 70%;
+  position: relative;
+}
+
+/* PDF Frame */
+iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  border: 2px solid #30363d;
+  box-shadow: 0 0 25px #58a6ff44;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+/* Show animation */
+iframe.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Back Button */
+.back-btn {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 25px;
+  background: #238636;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #2ea043;
+  box-shadow: 0 0 10px #2ea043;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+/* Responsive */
+@media(max-width: 768px){
+  .container {
+    flex-direction: column;
+  }
+  .cert-list, .viewer {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>My Certificates</h1>
+
+<div class="container">
+
+  <!-- LEFT SIDE LIST -->
+  <div class="cert-list">
+    <div class="cert-card active" onclick="loadPDF(this,'certificates/certificate1.pdf')">10th Grade</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate2.pdf')">12th Grade</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate3.pdf')">Graduation (B.C.A.)</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate4.pdf')">C Programming</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate5.pdf')">C++ Programming</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate6.pdf')">Data Science</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate7.pdf')">Python</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate8.pdf')">AI</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate9.pdf')">HTML & CSS</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate10.pdf')">JavaScript</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate11.pdf')">CyberSecurity</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate12.pdf')">GATE (GeeksForGeeks)</div>
+    <div class="cert-card" onclick="loadPDF(this,'certificates/certificate13.pdf')">TCS NQT(GeeksForGeeks)</div>
+  </div>
+
+  <!-- RIGHT SIDE VIEWER -->
+  <div class="viewer">
+    <iframe id="pdfViewer" src="certificates/certificate1.pdf" class="show"></iframe>
+  </div>
+
+</div>
+
+<a href="index.html" class="back-btn">⬅ Back to Home</a>
+
+<script>
+function loadPDF(element, file) {
+  const viewer = document.getElementById("pdfViewer");
+
+  // remove active class
+  document.querySelectorAll(".cert-card").forEach(card => {
+    card.classList.remove("active");
+  });
+
+  // add active class
+  element.classList.add("active");
+
+  // smooth transition
+  viewer.classList.remove("show");
+
+  setTimeout(() => {
+    viewer.src = file;
+    viewer.classList.add("show");
+  }, 200);
+}
+</script>
+
+</body>
+</html>
